@@ -4,6 +4,7 @@ require 'db_connector.php';
 function getAllMakes(){
     $result = array();
     $conn = connect();
+    $sql = 
     $query = $conn->query('select * from makes;');
     while ($row = $query->fetch_assoc()){
         array_push($result, array('makeId' => $row['makeId'], 'makeName'=> $row['makeName']));
@@ -17,8 +18,15 @@ function getAllMakes(){
 
 function getMakeId($id){
     $conn = connect();
-    $query = $conn->query('select makeName from makes where makeId = ' . $id);
+    $sql = 'select makeName from makes where makeId = ' . $id .';';
+    $query = $conn->query($sql);
     $result = $query->fetch_assoc();
     $conn->close();
     return json_encode($result);
+}
+
+function getAllModelsfromId($id){
+    $conn = connect();
+    $sql = 'select * from models where id ='. $id . ';';
+    $query = $conn->query(sql)
 }
