@@ -6,10 +6,13 @@ function getAllMakes(){
     $conn = connect();
     $query = $conn->query('select * from makes;');
     while ($row = $query->fetch_assoc()){
-        array_push($result, [$row['makeId'],$row['makeName']]);
+        array_push($result, array('makeId' => $row['makeId'], 'makeName'=> $row['makeName']));
     }
-    $conn->close();
-    return json_encode($result);
+    $count = $conn->query('select count(makeId) as count from makes')->fetch_assoc();
+    $total = array('Status'=> 'Success',
+                    'Count'=> $count['count'],
+                    'Result' => $result);
+    return json_encode($total);
 }
 
 function getMakeId($id){
