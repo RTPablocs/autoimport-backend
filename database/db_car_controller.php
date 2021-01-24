@@ -28,5 +28,5 @@ function getMakeId($id){
 function getAllModelsfromId($id){
     $conn = connect();
     $sql = 'select * from models where id ='. $id . ';';
-    $query = $conn->query(sql)
+    $query = $conn->query($sql);
 }
