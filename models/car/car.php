@@ -11,8 +11,8 @@ class Car{
     }
     function getAllMakes(){
         $sql = 'select * from makes';
-        $count = 'select count(makeId) from makes';
         $query = $this->conn->query($sql);
+        $count = $query->num_rows;
         $result = queryToJson($query, $count);
         return $result;
     }
