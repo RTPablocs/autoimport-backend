@@ -28,11 +28,11 @@ return function (ContainerBuilder $containerBuilder) {
 
         $user = $dbSettings['user'];
         $password = $dbSettings['password'];
-        $host = $settings['host'];
-        $db = $settings['database'];
-        $charset = $settings['charset'];
-        $url = "mysql:host=$host;database=$db;charset=$charset";
-        $flags = $settings['flags'];
+        $host = $dbSettings['host'];
+        $db = $dbSettings['database'];
+        $charset = $dbSettings['charset'];
+        $flags = $dbSettings['flags'];
+        $url = "mysql:host=$host;dbname=$db;charset=$charset";
 
         return new PDO ($url, $user, $password, $flags);
     }]);
