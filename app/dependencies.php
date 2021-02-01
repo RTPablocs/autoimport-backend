@@ -9,20 +9,31 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 return function (ContainerBuilder $containerBuilder) {
-    $containerBuilder->addDefinitions([
-        LoggerInterface::class => function (ContainerInterface $c) {
-            $settings = $c->get('settings');
+    $containerBuilder->addDefinitions([LoggerInterface::class => function (ContainerInterface $c) {
+        $settings = $c->get('settings');
 
-            $loggerSettings = $settings['logger'];
-            $logger = new Logger($loggerSettings['name']);
+        $loggerSettings = $settings['logger'];
+        $logger = new Logger($loggerSettings['name']);
 
-            $processor = new UidProcessor();
-            $logger->pushProcessor($processor);
+        $processor = new UidProcessor();
+        $logger->pushProcessor($processor);
 
-            $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
-            $logger->pushHandler($handler);
+        $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
+        $logger->pushHandler($handler);
 
-            return $logger;
-        },
-    ]);
+        return $logger;
+    }, PDO::class => function (ContainerInterface $c) {
+        $settings = $c->get('settings');
+        $dbSettings = $settings['database'];
+
+        $user = $dbSettings['user'];
+        $password = $dbSettings['password'];
+        $host = $settings['host'];
+        $db = $settings['database'];
+        $charset = $settings['charset'];
+        $url = "mysql:host=$host;database=$db;charset=$charset";
+        $flags = $settings['flags'];
+
+        return new PDO ($url, $user, $password, $flags);
+    }]);
 };
