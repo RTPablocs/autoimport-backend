@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Ad;
 
-interface AdRepository{
+interface AdRepository {
 
     public function findAll(): array;
 
