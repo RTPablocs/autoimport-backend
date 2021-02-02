@@ -11,4 +11,7 @@ interface AdRepository {
 
     public function findAdOfModel($modelName, $price): array;
 
+    public function deleteOne($id): void;
+    
+    public function createOne(array $data): void;
 }
