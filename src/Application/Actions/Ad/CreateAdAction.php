@@ -3,7 +3,6 @@
 namespace App\Application\Actions\Ad;
 
 use App\Application\Actions\ActionPayload;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Actions\Ad\AdAction;
 
