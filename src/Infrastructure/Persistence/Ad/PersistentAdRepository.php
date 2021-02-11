@@ -19,6 +19,13 @@ class PersistentAdRepository implements AdRepository {
         $result = $this->connection->query($sql);
         return $result->fetchAll();
     }
+    
+    public function findOne($id): array{
+        $sql = "select * from ads where id = $id;";
+        $result = $this->connection->query($sql);
+        return $result->fetchAll();
+
+    }
 
     public function findAdOfMake($makeName, $price): array {
         // TODO: Implement findAdOfMake() method.
@@ -49,4 +56,22 @@ class PersistentAdRepository implements AdRepository {
         $sql = "insert into ads values ($id, '$title', '$desc', '$make', '$model', $price, '$coords');";
         $this->connection->prepare($sql)->execute();
     }
+
+    public function updateOne(array $data, $id): void {
+    /*    $update = "";
+
+        foreach($data as $key){
+            $key = array_keys($data, $key);
+            if($key = end($data)){
+                $update = "$key"
+            }
+            $update . "$key=$data, ";
+
+        }
+        
+        $sql = "update ads set($update) where id=$id";
+
+        $this->connection->prepare($sql)->execute();
+    */
+}
 }
