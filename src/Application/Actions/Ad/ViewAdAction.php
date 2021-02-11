@@ -13,7 +13,7 @@ class ViewAdAction extends AdAction {
         $adId = $this->resolveArg('id');
 
         $ad = $this->adRepository->findOne($adId);
-        $this->logger->info("Ad with $adId was viewed");
+        $this->logger->info("Ad with id: $adId was viewed");
         return $this->respondWithData($ad);
     }
 }
